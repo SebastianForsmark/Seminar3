@@ -1,29 +1,38 @@
 package Projects.Intergration;
 
 /**
- * This is a facade to the hardware of the GARAGE, namely the door and the queue
- * number display on the outside wall.
+ * This is a facade to the hardware of the GARAGE, currently only the door.
  */
-public class Garage {
-    private Display queueNumDisp = new Display();
+class Garage {
 
-    /**
-     * Creates an instance and connects to the door and queue number display.
-     */
+    private boolean doorIsOpen = false;
     public Garage() {
     }
 
     /**
-     * Opens the door and displays the next queue number.
+     * Opens the door
      */
-    public void nextCustomer() {
-        queueNumDisp.nextNumber();
+    void openDoor() {
+
+        if (doorIsOpen) {
+            System.out.println("The door is already open.");}
+        else{
+            System.out.println("The door is being opened.");
+            doorIsOpen = true;
+        }
     }
 
     /**
      * Closes the door
      */
-    public void closeDoor() {
+     void closeDoor() {
+        if (doorIsOpen){
+            System.out.println("The door is being closed.");
+            doorIsOpen = false;
+        }
+        else{
+            System.out.println("The door is already closed.");
+        }
 
     }
 
