@@ -9,8 +9,8 @@ import javax.swing.SwingConstants;
 /**
  * Controls the queue number display outside the garage..
  */
-public class Display {
-    private static String HEADER = "Now Serving:";
+ class Display {
+    private static String HEADER = "Now Serving: ";
     private int queueNumber = -1;
     private JLabel queueNumberLabel = new JLabel("", SwingConstants.CENTER);
 
@@ -39,5 +39,9 @@ public class Display {
         frame.getContentPane().add(queueNumberLabel);
         frame.setBounds(600, 0, 200, 80);
         frame.setVisible(true);
+    }
+
+    int getQueueNumber() {
+        return queueNumber;
     }
 }
