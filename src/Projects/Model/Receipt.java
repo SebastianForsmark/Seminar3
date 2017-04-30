@@ -1,21 +1,23 @@
 package Projects.Model;
 
 
-import Projects.Util.Amount;
-
 public class Receipt {
-    private Amount cost;
+    private double cost;
     private boolean approved;
 
-    public Receipt(Amount cost, boolean approved){
+    public Receipt(double cost, boolean approved){
         this.cost = cost;
         this.approved = approved;
     }
-
-    public Amount getCost() {
+    /**
+     * @return The <code>cost</code> of the full inspection.
+     */
+    public double getCost() {
         return cost;
     }
-
+    /**
+     * @return Whether the payment was <code>approved</code>.
+     */
     public boolean getApproved(){
         return approved;
     }

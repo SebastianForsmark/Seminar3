@@ -1,7 +1,6 @@
 package Projects.Intergration;
 
 import Projects.Model.Receipt;
-import Projects.Util.Amount;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,8 +38,8 @@ public class PrinterTest {
     }
 
 private Receipt createReceipt(){
-    Amount testAmount = new Amount(200,"SEK");
-    return new Receipt(testAmount,true);
+    double cost=5;
+    return new Receipt(cost,true);
 }
 
 }
