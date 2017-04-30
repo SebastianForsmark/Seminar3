@@ -7,12 +7,11 @@ import Projects.Model.Inspection;
 import Projects.Model.InspectionChecklist;
 
 public class Controller {
-    private DatabaseManager databaseManager;
-    private SystemHandler systemHandler;
+    private DatabaseManager databaseManager = new DatabaseManager();
+    SystemHandler systemHandler = new SystemHandler();
 
     public Controller(){
-        DatabaseManager databaseManager = new DatabaseManager();
-        SystemHandler systemHandler = new SystemHandler();
+
     }
 
     /**
