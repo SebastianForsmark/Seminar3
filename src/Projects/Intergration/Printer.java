@@ -20,7 +20,21 @@ class Printer {
      * @param result The <code>InspectionChecklist</code> created at the end of the inspection.
      */
     void printInspectionResult(InspectionChecklist result){
-        System.out.println("Inspection results have been printed!");
+        System.out.println("-------------------");
+        for (int i = 0; i < result.inspectionDTOArray.length-1 ; i++) {
+            System.out.println("Part: " + result.inspectionDTOArray[i].getPartToInspect());
+            String inspectionResult;
+
+            if(result.inspectionDTOArray[i].getPassed()){
+                inspectionResult = "Passed!";
+            }
+            else{
+                inspectionResult = "Failed!";
+            }
+            System.out.println("Result: " + inspectionResult);
+            System.out.println("-------------------");
+        }
+
     }
 
 }

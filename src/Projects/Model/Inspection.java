@@ -1,12 +1,15 @@
 package Projects.Model;
 
 
+import java.util.EmptyStackException;
+
 public class Inspection {
-    private InspectionChecklist inspectionChecklist;
+    public InspectionChecklist currentInspectionChecklist;
     private Double cost;
+    int part = -1;
 
     public Inspection(InspectionChecklist inspections){
-        this.inspectionChecklist = inspections;
+        this.currentInspectionChecklist = inspections;
         this.cost=calculateCost();
     }
 
@@ -16,11 +19,20 @@ public class Inspection {
      */
     private double calculateCost(){
         double cost = 0;
-        InspectionDTO[] DTOArray = this.inspectionChecklist.inspectionDTOArray;
+        InspectionDTO[] DTOArray = this.currentInspectionChecklist.inspectionDTOArray;
         for (int i = 0; i < DTOArray.length-1; i++) {
              cost += DTOArray[i].getCost();
         }
         return cost;
+    }
+
+    public InspectionDTO fetchNextInspection(){
+        part++;
+        return this.currentInspectionChecklist.inspectionDTOArray[part];
+    }
+
+    public void updateInspectionChecklist(boolean isPassed, InspectionDTO target){
+        currentInspectionChecklist.updateInspectionDTO(isPassed, target);
     }
 
     /**

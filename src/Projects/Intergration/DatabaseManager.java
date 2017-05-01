@@ -13,4 +13,8 @@ private Database database = new Database();
     public InspectionChecklist FindInspectionsByRegNo(String regNo){
         return database.fetchInspectionsByRegNo(regNo);
     }
+
+    public void storeInspectionResults(InspectionChecklist inspectionResults){
+        database.storeInspection(inspectionResults);
+    }
 }

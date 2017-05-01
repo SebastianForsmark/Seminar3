@@ -1,14 +1,20 @@
 package Projects.Controller;
 
 
+import Projects.Intergration.CreditCard;
 import Projects.Intergration.DatabaseManager;
+import Projects.Intergration.PaymentAuthorization;
 import Projects.Intergration.SystemHandler;
 import Projects.Model.Inspection;
 import Projects.Model.InspectionChecklist;
+import Projects.Model.InspectionDTO;
+import Projects.Model.Receipt;
 
 public class Controller {
     private DatabaseManager databaseManager = new DatabaseManager();
-    SystemHandler systemHandler = new SystemHandler();
+    private SystemHandler systemHandler = new SystemHandler();
+    private PaymentAuthorization paymentAuthorization = new PaymentAuthorization();
+    public Inspection currentInspection;
 
     public Controller(){
 
@@ -21,7 +27,51 @@ public class Controller {
      */
     public double enterRegNo(String regNo){
         InspectionChecklist inspections = databaseManager.FindInspectionsByRegNo(regNo);
-        Inspection currentInspection = new Inspection(inspections);
+        currentInspection = new Inspection(inspections);
         return currentInspection.getCost();
+    }
+
+    /**
+     * Closes the <code>Garage</code> door
+     */
+    public void closeGarageDoor(){
+        systemHandler.closeGarageDoor();
+    }
+
+    /**
+     * Authorizes the payment and prints a <code>Receipt</code>
+     * @param creditcard The <code>CreditCard</code> constructed in the View
+     * @param cost The Cost derived from the <code>InspectionChecklist</code>
+     */
+    public void registerPayment(CreditCard creditcard, Double cost){
+        boolean isApproved = paymentAuthorization.authorizePayment(creditcard, cost);
+        Receipt paymentReceipt = new Receipt(cost, isApproved);
+        systemHandler.printReceipt(paymentReceipt);
+    }
+
+    /**
+     * Requests the next <code>InspectionDTO</code>
+     * @return The next <code>InspectionDTO</code> contained in the <code>InspectionChecklist</code>
+     */
+    public InspectionDTO getNextInspection(){
+    return currentInspection.fetchNextInspection();
+    }
+
+    public void registerResult(String result, InspectionDTO target){
+        boolean isPassed;
+        if (result.equals("passed")) {
+            isPassed = true;
+        }
+        else isPassed = false;
+    currentInspection.updateInspectionChecklist(isPassed, target);
+    }
+
+    public void inspectionComplete(InspectionChecklist inspectionResults){
+        databaseManager.storeInspectionResults(inspectionResults);
+        printInspectionResults(inspectionResults);
+    }
+
+    private void printInspectionResults(InspectionChecklist inspectionResults){
+        systemHandler.printResults(inspectionResults);
     }
 }

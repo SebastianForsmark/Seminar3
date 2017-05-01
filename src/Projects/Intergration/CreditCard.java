@@ -9,7 +9,7 @@ public final class CreditCard {
     private final int pin;
     private final String number;
     private final String holder;
-    private final YearMonth expiryDate;
+    private final String expiryDate;
     private final int CVC;
 
     /**
@@ -21,7 +21,7 @@ public final class CreditCard {
      * @param expiryDate The expiry date.
      * @param CVC        The CVC code.
      */
-    public CreditCard(int pin, String number, String holder, YearMonth expiryDate, int CVC) {
+    public CreditCard(int pin, String number, String holder, String expiryDate, int CVC) {
         this.pin = pin;
         this.number = number;
         this.holder = holder;
@@ -39,7 +39,7 @@ public final class CreditCard {
     /**
      * @return the expiry date
      */
-    public YearMonth getExpiryDate() {
+    public String getExpiryDate() {
         return expiryDate;
     }
 

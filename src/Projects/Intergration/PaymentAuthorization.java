@@ -14,7 +14,7 @@ public class PaymentAuthorization {
      *         <code>false</code> if it is not. This dummy implementation always
      *         returns <code>true</code>.
      */
-    public boolean authorizePayment(CreditCard card, int amount) {
+    public boolean authorizePayment(CreditCard card, double amount) {
         return true;
     }
 }

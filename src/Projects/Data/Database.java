@@ -58,4 +58,8 @@ String[] possibleParts = {"Exhaust Pipe","Drivers Chair","Headlights","Left fron
      InspectionDTO randomInspectionDTO(String regNo){
        return new InspectionDTO(randomPartToInspect(), randomCost(), false, regNo);
     }
+
+    public void storeInspection(InspectionChecklist completedInspection){
+        System.out.println("Inspection stored in database!");
+    }
 }
