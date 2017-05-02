@@ -46,7 +46,7 @@ public class Controller {
     public void registerPayment(CreditCard creditcard, Double cost){
         boolean isApproved = paymentAuthorization.authorizePayment(creditcard, cost);
         Receipt paymentReceipt = new Receipt(cost, isApproved);
-        systemHandler.printReceipt(paymentReceipt);
+        print(paymentReceipt);
     }
 
     /**
@@ -59,7 +59,10 @@ public class Controller {
 
     public void registerResult(String result, InspectionDTO target){
         boolean isPassed;
-        if (result.equals("passed")) {
+        if (
+            result.equalsIgnoreCase("passed")||
+            result.equalsIgnoreCase("pass")||
+            result.equalsIgnoreCase("Passed!")) {
             isPassed = true;
         }
         else isPassed = false;
@@ -68,10 +71,13 @@ public class Controller {
 
     public void inspectionComplete(InspectionChecklist inspectionResults){
         databaseManager.storeInspectionResults(inspectionResults);
-        printInspectionResults(inspectionResults);
-    }
+        print(inspectionResults);
 
-    private void printInspectionResults(InspectionChecklist inspectionResults){
+    }
+    private void print(InspectionChecklist inspectionResults){
         systemHandler.printResults(inspectionResults);
+    }
+    private void print(Receipt paymentReceipt){
+        systemHandler.printReceipt(paymentReceipt);
     }
 }

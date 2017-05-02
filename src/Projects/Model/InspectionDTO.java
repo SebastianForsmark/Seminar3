@@ -25,7 +25,7 @@ package Projects.Model;
       * @param oldDTO The DTO that will be updated with new information.
       * @param passed Whether the vehicle <code>passed</code> the <code>Inspection</code>.
       */
-    public InspectionDTO(InspectionDTO oldDTO, boolean passed){
+     InspectionDTO(InspectionDTO oldDTO, boolean passed){
         this.partToInspect = oldDTO.partToInspect;
         this.cost = oldDTO.cost;
         this.passed = passed;
@@ -37,6 +37,9 @@ package Projects.Model;
          return regNo;
      }
 
+     /**
+      * @return The part to be inspected
+      */
      public String getPartToInspect() {
         return partToInspect;
     }

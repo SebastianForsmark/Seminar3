@@ -10,7 +10,7 @@ public class InspectionChecklist {
         inspectionDTOArray = inspectionsFromDatabase;
 
     }
-    public void updateInspectionDTO(boolean isPassed, InspectionDTO target){
+     void updateInspectionDTO(boolean isPassed, InspectionDTO target){
         int x = identifyArrayIndex(target);
         if(x>=0)
         this.inspectionDTOArray[x] = new InspectionDTO(target, isPassed);
@@ -18,7 +18,11 @@ public class InspectionChecklist {
 
     private int identifyArrayIndex(InspectionDTO target){
         for (int i = 0; i < inspectionDTOArray.length-1 ; i++) {
-            if (inspectionDTOArray[i].getCost() == target.getCost() && inspectionDTOArray[i].getPartToInspect() == target.getPartToInspect() && inspectionDTOArray[i].getRegNo() == target.getRegNo()){
+            if (
+                    inspectionDTOArray[i].getCost() == target.getCost() && //Cost is the same
+                    inspectionDTOArray[i].getPartToInspect() == target.getPartToInspect() && //Part is the same
+                    inspectionDTOArray[i].getRegNo() == target.getRegNo() // RegNo is the same
+                    ){
                 return i;
             }
         }

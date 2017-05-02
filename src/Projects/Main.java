@@ -11,7 +11,8 @@ public class Main {
         System.out.println("Please enter registration number: ");
         String registrationNumber = keyboard.nextLine();
         double cost = contr.enterRegNo(registrationNumber);
-        System.out.println("The cost is: " + cost + " SEK");
+        int intCost = (int) cost;
+        System.out.println("The cost is: " + intCost + " SEK");
         CreditCard creditCard = new CreditCard(1234,"894583054","John Smith","2018/09",231);
         contr.registerPayment(creditCard,cost);
         System.out.println("Press any key to continue");

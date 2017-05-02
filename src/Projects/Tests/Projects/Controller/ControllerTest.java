@@ -22,13 +22,13 @@ public class ControllerTest {
 
     private DatabaseManager testDatabaseManager;
     private String regNo;
-    Inspection testInspection;
+    private Inspection testInspection;
     private PaymentAuthorization paymentAuthorization;
     private SystemHandler systemHandler;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private CreditCard creditCard;
     private double cost;
-    Controller testController;
+    private Controller testController;
 
     @Before
     public void setUp() {
@@ -48,12 +48,12 @@ public class ControllerTest {
         regNo = null;
         paymentAuthorization = null;
         systemHandler = null;
+        testInspection = null;
     }
 
     @Test
     public void enterRegNoReturnsACost()  {
-        InspectionChecklist testInspectionChecklist =  testDatabaseManager.FindInspectionsByRegNo(regNo);
-        Inspection testInspection = new Inspection(testInspectionChecklist);
+        testInspection = createTestInspection();
         assertTrue("cost is below 0",testInspection.getCost() > 0);
 
     }
@@ -61,15 +61,18 @@ public class ControllerTest {
     @Test
     public void enterRegNoDifferentString()  {
         regNo = "333PPP";
-        InspectionChecklist testInspectionChecklist =  testDatabaseManager.FindInspectionsByRegNo(regNo);
-        Inspection testInspection = new Inspection(testInspectionChecklist);
+        testInspection = createTestInspection();
         assertTrue("cost is below 0 for string other than 123ABC",testInspection.getCost() > 0);
-
     }
+
     @Test
     public void paymentRegistersAndPrints() {
             testController.registerPayment(creditCard,  cost);
             assertEquals("Receipt not printed", "Receipt has been printed!\r\n", outContent.toString());
+    }
 
+    private Inspection createTestInspection(){
+        InspectionChecklist testList =  testDatabaseManager.FindInspectionsByRegNo(regNo);
+        return new Inspection(testList);
     }
 }

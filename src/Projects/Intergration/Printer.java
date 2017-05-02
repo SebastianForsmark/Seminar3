@@ -4,7 +4,7 @@ import Projects.Model.InspectionChecklist;
 import Projects.Model.Receipt;
 
 class Printer {
-    public Printer(){
+    Printer(){
     }
 
     /**
@@ -20,7 +20,7 @@ class Printer {
      * @param result The <code>InspectionChecklist</code> created at the end of the inspection.
      */
     void printInspectionResult(InspectionChecklist result){
-        System.out.println("-------------------");
+        System.out.println("*-----------------*");
         for (int i = 0; i < result.inspectionDTOArray.length-1 ; i++) {
             System.out.println("Part: " + result.inspectionDTOArray[i].getPartToInspect());
             String inspectionResult;
@@ -32,9 +32,7 @@ class Printer {
                 inspectionResult = "Failed!";
             }
             System.out.println("Result: " + inspectionResult);
-            System.out.println("-------------------");
+            System.out.println("*-----------------*");
         }
-
     }
-
 }
