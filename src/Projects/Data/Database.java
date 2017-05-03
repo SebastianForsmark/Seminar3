@@ -30,7 +30,7 @@ String[] possibleParts = {"Exhaust Pipe","Drivers Chair","Headlights","Left fron
         for (int i = 0; i < numberOfInspections-1 ; i++) {
             inspections[i] = randomInspectionDTO(regNo);
         }
-        return new InspectionChecklist(numberOfInspections, inspections);
+        return new InspectionChecklist(inspections);
 
     }
 
