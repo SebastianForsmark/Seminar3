@@ -40,8 +40,8 @@ public class Controller {
      * @return The cost of the <code>Inspection</code>
      */
     public double enterRegNo(String regNo) {
-        InspectionChecklist inspections = databaseManager.findInspectionsByRegNo(regNo);
-        currentInspection = new Inspection(inspections);
+        InspectionChecklist partsOfInspection = databaseManager.findInspectionsByRegNo(regNo);
+        currentInspection = new Inspection(partsOfInspection);
         return currentInspection.getCost();
     }
 
