@@ -43,6 +43,10 @@ class Display {
         frame.setVisible(true);
     }
 
+    /**
+     * Gets the <code>queueNumber</code>
+     * @return Current <code>queueNumber</code>
+     */
     int getQueueNumber() {
         return queueNumber;
     }

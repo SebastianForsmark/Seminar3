@@ -1,5 +1,8 @@
 package Projects.Model;
 
+/**
+ * Contains the information about each partial inspection.
+ */
 public class InspectionDTO {
     private String regNo;
     private String partToInspect;

@@ -1,6 +1,8 @@
 package Projects.Model;
 
-
+/**
+ * Contains information about the payment and <code>PaymentAuthorization</code> to be printed on the <code>Printer</code>.
+ */
 public class Receipt {
     private double cost;
     private boolean approved;

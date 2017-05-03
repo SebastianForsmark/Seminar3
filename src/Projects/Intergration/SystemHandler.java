@@ -4,7 +4,9 @@ package Projects.Intergration;
 import Projects.Model.InspectionChecklist;
 import Projects.Model.Receipt;
 
-
+/**
+ * Acts as intermediary between <code>Controller</code> and some external systems.
+ */
 public class SystemHandler {
     Display numberDisplay;
     private Garage garage;
@@ -17,7 +19,7 @@ public class SystemHandler {
     }
 
     /**
-     * Closes the garage door
+     * Receives command from <code>Controller</code> to initiate inspection, opens the <code>Garage</code> door and updates the <code>Display</code>.
      */
 
     public void nextInspection() {
@@ -25,6 +27,9 @@ public class SystemHandler {
         numberDisplay.nextNumber();
     }
 
+    /**
+     * Closes the garage door
+     */
     public void closeGarageDoor() {
         garage.closeDoor();
     }

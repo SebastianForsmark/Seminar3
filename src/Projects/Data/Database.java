@@ -4,6 +4,9 @@ import Projects.Model.*;
 
 import java.util.Random;
 
+/**
+ * Has the data and information needed for each vehicle
+ */
 public class Database {
 
     private Random r = new Random();
@@ -20,9 +23,8 @@ public class Database {
      * @return Returns a randomly generated <code>InspectionChecklist</code>.
      */
     public InspectionChecklist fetchInspectionsByRegNo(String regNo) {
-            return createRandomInspection(regNo);
-        }
-
+        return createRandomInspection(regNo);
+    }
 
 
     /**
@@ -70,11 +72,13 @@ public class Database {
         return new InspectionDTO(randomPartToInspect(), randomCost(), false, regNo);
     }
 
+    /**
+     * Saves the <code>InspectionChecklist</code> in the <code>Database</code>
+     *
+     * @param completedInspection
+     */
     public void storeInspection(InspectionChecklist completedInspection) {
         System.out.println("Inspection stored in database!");
     }
-    private String shortenTo6Chars(String regNo){
-        System.out.println("Warning: Registration number had more than 6 characters.");
-        return regNo.substring(0, Math.min(regNo.length(), 6));
-    }
 }
+

@@ -1,6 +1,8 @@
 package Projects.Model;
 
-
+/**
+ * Handles the <code>InspectionChecklist</code>'s to process, fetch, or store information.
+ */
 public class Inspection {
     public InspectionChecklist currentInspectionChecklist;
     private Double cost;

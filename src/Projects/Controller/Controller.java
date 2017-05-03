@@ -10,6 +10,9 @@ import Projects.Model.InspectionChecklist;
 import Projects.Model.InspectionDTO;
 import Projects.Model.Receipt;
 
+/**
+ * Handles system operations
+ */
 public class Controller {
     private DatabaseManager databaseManager;
     private SystemHandler systemHandler;
@@ -22,6 +25,9 @@ public class Controller {
         paymentAuthorization = new PaymentAuthorization();
     }
 
+    /**
+     * Updates the display and opens the door.
+     */
     public void initiateInspection() {
         System.out.println("Display updated.");
         systemHandler.nextInspection();
@@ -75,6 +81,10 @@ public class Controller {
         currentInspection.updateInspectionChecklist(isPassed, target);
     }
 
+    /**
+     * Stores the inspection results and prints them.
+     * @param inspectionResults The results of the inspection as an <code>InspectionChecklist</code>
+     */
     public void inspectionComplete(InspectionChecklist inspectionResults) {
         databaseManager.storeInspectionResults(inspectionResults);
         print(inspectionResults);

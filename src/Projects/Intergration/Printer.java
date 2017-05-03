@@ -3,6 +3,9 @@ package Projects.Intergration;
 import Projects.Model.InspectionChecklist;
 import Projects.Model.Receipt;
 
+/**
+ * Receives things to print and has methods for printing them.
+ */
 class Printer {
     Printer() {
     }
