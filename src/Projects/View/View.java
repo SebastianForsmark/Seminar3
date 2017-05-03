@@ -22,7 +22,6 @@ public class View {
             inputRegistrationNumber();
             handlePayment();
             inspectAndSubmitResults();
-            //Restart
         }
     }
 
@@ -58,11 +57,11 @@ public class View {
         int intCost = (int) cost;
         System.out.println("The cost is: " + intCost + " SEK");
         System.out.println("Press Enter to pay");
-        String infiniteMoney = keyboard.nextLine();
+        String pay = keyboard.nextLine();
         CreditCard creditCard = new CreditCard(1234, "894583054", "John Smith", "2018/09", 231);
         controller.registerPayment(creditCard, cost);
         System.out.println("Press Enter to continue");
-        String anyKey = keyboard.nextLine();
+        String proceedToInspection = keyboard.nextLine();
     }
     private void inspectAndSubmitResults(){
         InspectionDTO currentInspection;

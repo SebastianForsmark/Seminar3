@@ -24,7 +24,7 @@ public class InspectionChecklist {
         int x = identifyArrayIndex(target);
         if (x == -1) {
             return;
-        } // If it isn't part of the array, replace nothing.
+        }
         this.inspectionDTOArray[x] = new InspectionDTO(target, isPassed);
     }
 
@@ -35,15 +35,16 @@ public class InspectionChecklist {
      * @return the index of the target <code>InspectionDTO</code>.
      */
     int identifyArrayIndex(InspectionDTO target) {
+        int notPartOfArray = -1;
         for (int i = 0; i < inspectionDTOArray.length; i++) {
             if (
-                    inspectionDTOArray[i].getCost() == target.getCost() && //Is the cost is the same?
-                            inspectionDTOArray[i].getPartToInspect().equals(target.getPartToInspect())  && //Is the part is the same?
-                            inspectionDTOArray[i].getRegNo().equals(target.getRegNo())  //Is the RegNo the same?
+                            inspectionDTOArray[i].getCost() == target.getCost() &&
+                            inspectionDTOArray[i].getPartToInspect().equals(target.getPartToInspect()) &&
+                            inspectionDTOArray[i].getRegNo().equals(target.getRegNo())
                     ) {
                 return i;
             }
         }
-        return -1;
+        return notPartOfArray;
     }
 }
