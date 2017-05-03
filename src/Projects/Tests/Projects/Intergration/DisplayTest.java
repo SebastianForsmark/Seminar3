@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class DisplayTest {
     private Display test;
-    private int largeCustomerAmount = 1000000;
+
     @Before
     public void setUp() {
         test = new Display();
@@ -22,12 +22,12 @@ public class DisplayTest {
 
     @Test
     public void countToHighNumber() {
-        int expResult = largeCustomerAmount;
+        int largeCustomerAmount = 1000000;
         for (int i = 0; i < largeCustomerAmount; i++) {
-           test.nextNumber();
+            test.nextNumber();
         }
         int result = test.getQueueNumber();
-        assertEquals("Can't count to a high number accurately", expResult, result);
+        assertEquals("Can't count to a high number accurately", largeCustomerAmount, result);
 
     }
 

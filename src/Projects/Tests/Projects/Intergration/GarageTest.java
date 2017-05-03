@@ -27,20 +27,25 @@ public class GarageTest {
         testSubject = null;
     }
 
+    /**
+     * The test opens the door then attempts to open it again.
+     */
     @Test
-    public void openDoorWhenOpened()  {
-        //The test opens the door then attempts to open it again.
+    public void openDoorWhenOpened() {
+
         testSubject.openDoor();
         testSubject.openDoor();
-        assertEquals("The door is being opened.\r\nThe door is already open.\r\n", outContent.toString());
+        assertEquals("Incorrectly handles opening an open door", "The door is being opened.\r\nThe door is already open.\r\n", outContent.toString());
 
     }
 
+    /**
+     * The test attempts to close an already closed door.
+     */
     @Test
     public void closeDoorWhenClosed() {
-        //The test attempts to close an already closed door.
         testSubject.closeDoor();
-        assertEquals("The door is already closed.\r\n", outContent.toString());
+        assertEquals("Incorrectly handles closing a closed door", "The door is already closed.\r\n", outContent.toString());
     }
 
 }

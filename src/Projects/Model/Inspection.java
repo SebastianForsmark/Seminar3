@@ -1,42 +1,55 @@
 package Projects.Model;
 
 
-import java.util.EmptyStackException;
-
 public class Inspection {
     public InspectionChecklist currentInspectionChecklist;
     private Double cost;
-    int part = -1;
+    private int part = -1;
 
-    public Inspection(InspectionChecklist inspections){
+    public Inspection(InspectionChecklist inspections) {
         this.currentInspectionChecklist = inspections;
-        this.cost=calculateCost();
+        this.cost = calculateCost();
     }
 
     /**
      * Proceeds through the <code>InspectionChecklist</code> and sums the costs of each individual <code>InspectionDTO</code>
+     *
      * @return The sum of all the costs in the array of <code>InspectionDTO</code>'s
      */
-    private double calculateCost(){
+    double calculateCost() {
         double cost = 0;
         InspectionDTO[] DTOArray = this.currentInspectionChecklist.inspectionDTOArray;
-        for (int i = 0; i < DTOArray.length-1; i++) {
-             cost += DTOArray[i].getCost();
+        for (int i = 0; i <= DTOArray.length - 1; i++) {
+            cost += DTOArray[i].getCost();
         }
         return cost;
     }
 
-    public InspectionDTO fetchNextInspection(){
+    /**
+     * Proceeds through the array starting at 0 and incrementing with each method call.
+     *
+     * @return The next <code>InspectionDTO</code> in the array.
+     */
+    public InspectionDTO fetchNextInspection() {
         part++;
-        return this.currentInspectionChecklist.inspectionDTOArray[part];
+        if (part <= currentInspectionChecklist.inspectionDTOArray.length)
+            return this.currentInspectionChecklist.inspectionDTOArray[part];
+        else {
+            throw new ArrayIndexOutOfBoundsException();
+        }
     }
 
-    public void updateInspectionChecklist(boolean isPassed, InspectionDTO target){
+    /**
+     * Updates the <code>isPassed</code> boolean of an <code>InspectionDTO</code>.
+     *
+     * @param isPassed The result of the <code>Inspection</code>.
+     * @param target   The <code>InspectionDTO</code> that needs updating.
+     */
+    public void updateInspectionChecklist(boolean isPassed, InspectionDTO target) {
         currentInspectionChecklist.updateInspectionDTO(isPassed, target);
     }
 
     /**
-     *
      * @return The cost of the <code>Inspection</code>
      */
     public Double getCost() {

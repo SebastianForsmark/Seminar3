@@ -7,16 +7,14 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 /**
- * Controls the queue number display outside the garage..
+ * Controls the queue number display outside the garage.
  */
- class Display {
-    private static String HEADER = "Now Serving: ";
+class Display {
     private int queueNumber = -1;
     private JLabel queueNumberLabel = new JLabel("", SwingConstants.CENTER);
 
     /**
-     * Connects to the queue number display and shows the number
-     * <code>zero</code>.
+     * Connects to the queue number display and displays the number <code>zero</code>.
      */
     Display() {
         nextNumber();
@@ -30,7 +28,11 @@ import javax.swing.SwingConstants;
         queueNumberLabel.setText(Integer.toString(++queueNumber));
     }
 
+    /**
+     * Initiates the <code>Display</code> and graphical interface of it.
+     */
     private void contactDisplay() {
+        String HEADER = "Now Serving: ";
         JFrame frame = new JFrame(HEADER);
         Font labelFont = new Font(Font.SERIF, Font.BOLD, 30);
         queueNumberLabel.setFont(labelFont);

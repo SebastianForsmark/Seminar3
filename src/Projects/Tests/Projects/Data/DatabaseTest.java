@@ -31,23 +31,23 @@ public class DatabaseTest {
 
     @Test
     public void inspectionGeneratedFalse() {
-        assertEquals("Inspection is generated passed",isPassed, false);
+        assertEquals("Inspection is generated passed", isPassed, false);
     }
 
     @Test
     public void stringGeneratedCorrectly() {
-        assertEquals("String not from list of parts",true, contains(testDatabase.possibleParts,generatedPart));
+        assertEquals("String not from list of parts", true, contains(testDatabase.possibleParts, generatedPart));
     }
 
     @Test
     public void costWithinBounds() {
-        assertTrue("Cost outside of accepted parameters",cost<1000 && cost > 0);
+        assertTrue("Cost outside of accepted parameters", cost < 1000 && cost > 0);
     }
 
-    private static  boolean contains (final String[] array, final String possibleMember) {
-            for (String arrayPart : array){
-                if (arrayPart == possibleMember)
-                    return true;
+    private static boolean contains(final String[] array, final String possibleMember) {
+        for (String arrayPart : array) {
+            if (arrayPart.equals(possibleMember) )
+                return true;
         }
 
         return false;
