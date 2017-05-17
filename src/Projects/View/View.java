@@ -4,6 +4,10 @@ import Projects.Controller.*;
 import Projects.Intergration.*;
 import Projects.Model.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 
@@ -14,21 +18,32 @@ public class View {
 
     public View(Controller contr) {
         controller = contr;
+        contr.addObserver(new InspectionStatsView());
     }
 
+    /**
+     * Loops through the entire flow of the inspection in a constant loop after initiating the systems.
+     */
     public void initiateInspection() {
         while (true) {
             beginInspection();
-            inputRegistrationNumber();
+            try {
+                inputRegistrationNumber();
+            }
+            catch (FileNotFoundException e){
+                System.out.println(e.getMessage());
+            }
             handlePayment();
             inspectAndSubmitResults();
         }
     }
 
 
+
     /**
-     * Below are divided sub-methods for the 'view'
+     * -------------------------------------------        Below are divided sub-methods for the 'view'         -------------------------------------------
      */
+
 
 
     private void beginInspection(){
@@ -40,7 +55,7 @@ public class View {
         controller.closeGarageDoor();
     }
 
-    private void inputRegistrationNumber(){
+    private void inputRegistrationNumber()throws FileNotFoundException{
         cost = 0;
         while (true) {
             try {
@@ -48,8 +63,11 @@ public class View {
                 String registrationNumber = keyboard.nextLine();
                 cost = controller.enterRegNo(registrationNumber);
                 break;
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | RegNoNotFoundException e) {
                 System.out.println(e.getMessage());
+                FileOutputStream fos = new FileOutputStream(new File("exceptionlog.txt"), true);
+                PrintStream ps = new PrintStream(fos);
+                e.printStackTrace(ps);
             }
         }
     }

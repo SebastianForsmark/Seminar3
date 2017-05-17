@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 
 public class DatabaseManagerTest {
@@ -25,14 +26,22 @@ public class DatabaseManagerTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void accidentalLongRegistrationNumber()   {
-        testDatabaseManager.findInspectionsByRegNo("ABC123333333");
-
+        try {
+            testDatabaseManager.findInspectionsByRegNo("ABC123333333");
+        }
+        catch (RegNoNotFoundException e){
+            fail();
+        }
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void accidentalShortRegistrationNumber()   {
-        testDatabaseManager.findInspectionsByRegNo("23");
-
+        try {
+            testDatabaseManager.findInspectionsByRegNo("23");
+        }
+        catch (RegNoNotFoundException e){
+            fail();
+        }
 
     }
 

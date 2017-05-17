@@ -17,6 +17,7 @@ public class SystemHandlerTest {
     @Before
     public void setUp()   {
         System.setOut(new PrintStream(outContent));
+        testSystemHandler.numberDisplay.resetDisplay();
     }
 
     @After

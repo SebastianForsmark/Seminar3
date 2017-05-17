@@ -13,8 +13,8 @@ public class SystemHandler {
     private Printer printer;
 
     public SystemHandler() {
-        numberDisplay = new Display();
-        garage = new Garage();
+        numberDisplay = Display.getDisplay();
+        garage = Garage.getGarage();
         printer = new Printer();
     }
 

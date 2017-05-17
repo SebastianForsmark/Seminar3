@@ -1,13 +1,17 @@
 package Projects.Intergration;
 
 /**
- * This is a facade to the hardware of the GARAGE, currently only the door.
+ * This is a facade to the hardware of the GARAGE, currently only the door. Created as a singleton.
  */
 class Garage {
-
+    private static final Garage GARAGE = new Garage();
     private boolean doorIsOpen = false;
 
-    Garage() {
+    static Garage getGarage() {
+        return GARAGE;
+    }
+    private Garage(){
+
     }
 
     /**

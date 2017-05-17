@@ -1,5 +1,6 @@
 package Projects.Data;
 
+import Projects.Intergration.RegNoNotFoundException;
 import Projects.Model.InspectionChecklist;
 import Projects.Model.InspectionDTO;
 import org.junit.After;
@@ -15,6 +16,7 @@ public class DatabaseTest {
     private double cost;
     private String generatedPart;
     private boolean isPassed;
+
 
     @Before
     public void setUp() {
@@ -36,7 +38,7 @@ public class DatabaseTest {
 
     @Test
     public void stringGeneratedCorrectly() {
-        assertEquals("String not from list of parts", true, contains(testDatabase.possibleParts, generatedPart));
+        assertEquals("String not from list of parts", true, testDatabase.memberOfArray(testDatabase.possibleParts, generatedPart));
     }
 
     @Test
@@ -44,13 +46,15 @@ public class DatabaseTest {
         assertTrue("Cost outside of accepted parameters", cost < 1000 && cost > 0);
     }
 
-    private static boolean contains(final String[] array, final String possibleMember) {
-        for (String arrayPart : array) {
-            if (arrayPart.equals(possibleMember) )
-                return true;
+
+    @Test(expected = RegNoNotFoundException.class)
+    public void regNoExceptionTest() throws RegNoNotFoundException {
+        String incorrectRegNo = "000000";
+        try {
+            testDatabase.fetchInspectionsByRegNo(incorrectRegNo);
         }
-
-        return false;
-    }
-
+        catch(IllegalArgumentException e){
+            fail();
+        }
+        }
 }

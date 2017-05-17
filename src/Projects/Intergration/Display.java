@@ -7,18 +7,23 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 /**
- * Controls the queue number display outside the garage.
+ * Controls the queue number display outside the garage. Created as a singleton
  */
 class Display {
+    private static final Display DISPLAY = new Display();
     private int queueNumber = -1;
     private JLabel queueNumberLabel = new JLabel("", SwingConstants.CENTER);
 
     /**
      * Connects to the queue number display and displays the number <code>zero</code>.
      */
-    Display() {
+    private Display() {
         nextNumber();
         contactDisplay();
+    }
+
+    static Display getDisplay() {
+        return DISPLAY;
     }
 
     /**
@@ -43,8 +48,13 @@ class Display {
         frame.setVisible(true);
     }
 
+    void resetDisplay() {
+        queueNumber = 0;
+    }
+
     /**
      * Gets the <code>queueNumber</code>
+     *
      * @return Current <code>queueNumber</code>
      */
     int getQueueNumber() {

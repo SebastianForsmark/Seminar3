@@ -12,7 +12,7 @@ public class DisplayTest {
 
     @Before
     public void setUp() {
-        test = new Display();
+        test = test.getDisplay();
     }
 
     @After

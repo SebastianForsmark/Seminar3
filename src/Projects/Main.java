@@ -2,6 +2,7 @@ package Projects;
 import Projects.Controller.Controller;
 import Projects.Intergration.*;
 import Projects.Model.InspectionDTO;
+import Projects.View.InspectionStatsView;
 import Projects.View.View;
 
 import java.util.Scanner;

@@ -1,14 +1,14 @@
 package Projects.Controller;
 
 
-import Projects.Intergration.CreditCard;
-import Projects.Intergration.DatabaseManager;
-import Projects.Intergration.PaymentAuthorization;
-import Projects.Intergration.SystemHandler;
+import Projects.Intergration.*;
 import Projects.Model.Inspection;
 import Projects.Model.InspectionChecklist;
 import Projects.Model.InspectionDTO;
 import Projects.Model.Receipt;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles system operations
@@ -18,6 +18,7 @@ public class Controller {
     private SystemHandler systemHandler;
     private PaymentAuthorization paymentAuthorization;
     public Inspection currentInspection;
+    private List<InspectionResultsObserver> inspectionObservers = new ArrayList<>();
 
     public Controller() {
         databaseManager = new DatabaseManager();
@@ -34,12 +35,15 @@ public class Controller {
     }
 
     /**
+     *
      * Collects the <code>InspectionChecklist</code> from the <code>Database</code>, creates an <code>Inspection</code> and calculates the sum of the costs.
      *
      * @param regNo The registration number received from View
      * @return The cost of the <code>Inspection</code>
+     * @throws IllegalArgumentException The registration number needs to be 6 characters long.
+     * @throws RegNoNotFoundException The registration number needs to be found in the <code>Database</code> (Currently hardcoded).
      */
-    public double enterRegNo(String regNo) {
+    public double enterRegNo(String regNo) throws IllegalArgumentException, RegNoNotFoundException{
         InspectionChecklist partsOfInspection = databaseManager.findInspectionsByRegNo(regNo);
         currentInspection = new Inspection(partsOfInspection);
         return currentInspection.getCost();
@@ -73,12 +77,18 @@ public class Controller {
         return currentInspection.fetchNextInspection();
     }
 
+    /**
+     * Takes a <code>String</code> from <code>View</code> and if it says "passed","pass", or "p" then the inspection passed, else it failed. It then informs the observers.
+     * @param result <code>String</code> from the inspector after being asked if the inspection passed.
+     * @param target The current <code>InspectionDTO</code> being handled.
+     */
     public void registerResult(String result, InspectionDTO target) {
         boolean isPassed;
         isPassed = result.equalsIgnoreCase("passed") ||
                 result.equalsIgnoreCase("pass") ||
                 result.equalsIgnoreCase("p");
         currentInspection.updateInspectionChecklist(isPassed, target);
+        informObservers(isPassed);
     }
 
     /**
@@ -97,5 +107,23 @@ public class Controller {
 
     private void print(Receipt paymentReceipt) {
         systemHandler.printReceipt(paymentReceipt);
+    }
+
+    /**
+     * Adds an observer to a list of observers.
+     * @param obs an object of <code>InspectionResultObserver</code>.
+     */
+    public void addObserver(InspectionResultsObserver obs){
+        inspectionObservers.add(obs);
+    }
+
+    /**
+     * Informs observing classes that the current inspection passed or failed.
+     * @param isPassed Whether the current inspection passed or failed.
+     */
+    private void informObservers(boolean isPassed){
+        for(InspectionResultsObserver obs : inspectionObservers){
+            obs.newResult(isPassed);
+        }
     }
 }

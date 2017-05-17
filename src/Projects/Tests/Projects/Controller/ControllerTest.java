@@ -1,9 +1,6 @@
 package Projects.Controller;
 
-import Projects.Intergration.CreditCard;
-import Projects.Intergration.DatabaseManager;
-import Projects.Intergration.PaymentAuthorization;
-import Projects.Intergration.SystemHandler;
+import Projects.Intergration.*;
 import Projects.Model.Inspection;
 import Projects.Model.InspectionChecklist;
 import org.junit.After;
@@ -29,7 +26,7 @@ public class ControllerTest {
     @Before
     public void setUp() {
         testDatabaseManager = new DatabaseManager();
-        regNo = "123ABC";
+        regNo = "ABC123";
         paymentAuthorization = new PaymentAuthorization();
         systemHandler = new SystemHandler();
         CreditCard creditCard = new CreditCard(1234, "894583054", "John Smith", "2018/09", 231);
@@ -55,15 +52,21 @@ public class ControllerTest {
     }
 
     @Test
-    public void enterRegNoDifferentString() {
+    public void nonExistingRegNo() {
         regNo = "333PPP";
         testInspection = createTestInspection();
-        assertTrue("cost is below 0 for string other than 123ABC", testInspection.getCost() > 0);
+        assertTrue("Non existing regNo returns inspection", testInspection == null);
     }
 
 
     private Inspection createTestInspection() {
-        InspectionChecklist testList = testDatabaseManager.findInspectionsByRegNo(regNo);
-        return new Inspection(testList);
+        try {
+            InspectionChecklist testList = testDatabaseManager.findInspectionsByRegNo(regNo);
+            return new Inspection(testList);
+        }
+        catch (RegNoNotFoundException e){
+            return null;
+        }
     }
+
 }

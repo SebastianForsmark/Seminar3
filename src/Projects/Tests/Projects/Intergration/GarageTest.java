@@ -17,13 +17,14 @@ public class GarageTest {
 
     @Before
     public void setUp() {
-        testSubject = new Garage();
+        testSubject = Garage.getGarage();
         System.setOut(new PrintStream(outContent));
 
     }
 
     @After
     public void tearDown() {
+        testSubject.closeDoor();
         testSubject = null;
     }
 
