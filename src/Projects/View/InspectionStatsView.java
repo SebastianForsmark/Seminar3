@@ -8,6 +8,7 @@ import Projects.Controller.InspectionResultsObserver;
 public class InspectionStatsView implements InspectionResultsObserver {
     private int passedInspections = 0;
     private int failedInspections = 0;
+
     private void printResults(){
         System.out.println("-------------------------------\nNumber of passed inspections: "+passedInspections+"\nNumber of failed inspections: "+failedInspections+"\n-------------------------------");
     }

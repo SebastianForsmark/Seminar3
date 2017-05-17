@@ -12,7 +12,7 @@ public class Database {
 
     private Random r = new Random();
     String[] possibleParts = {"Exhaust Pipe", "Drivers Chair", "Headlights", "Left front tire", "Ejector seat", "Illegal nitrous system", "Steering wheel"};
-    private String[] regNosInDatabase = {"ABC123", "LOL666", "FATBOI", "HOTGRL"};
+    private String[] regNosInDatabase = {"ABC123", "LOL666", "SWAGGG", "HOTGRL"};
 
     public Database() {
 
@@ -103,7 +103,7 @@ public class Database {
             return strat;
         if (regNo.equals("HOTGRL"))
             strat = new AttractiveFemaleCustomerStrategy();
-        if (regNo.equals("FATBOI"))
+        if (regNo.equals("SWAGGG"))
             strat = new ScamCustomerStrategy();
         return strat;
     }
